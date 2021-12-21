@@ -18,8 +18,18 @@ public:
   //Generate and store a private/public key pair RSA 2048 bit
   bool generateKeyPair(char* publicKeyFilePath, char* privateKeyFilePath);
 
+  //
+  void SetSerial(bool b) { m_bSerial = b; }
+  void MySerial(const char* szformat, ...);
+  void SetMyFuncSerialInfo(void(*f)(const char* szformat, ...)) { m_funcMySerialInfo = f; }
+
+  //
+  void (*m_funcMySerialInfo)(const char* szformat, ...) = nullptr;
+
 private:
   void cleanup();
 
+  //
+  bool m_bSerial = false;
 };
 #endif
